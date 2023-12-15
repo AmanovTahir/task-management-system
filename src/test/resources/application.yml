@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: task-ms
+    group:
+      test:
+        - db-test
+  config:
+    import:
+      - application-logging.yml
+      - application-db.yml
+      - application-security.yml
+      - application-actuator.yml
+
+logging:
+  level:
+    sql: debug
