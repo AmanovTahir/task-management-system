@@ -1,0 +1,58 @@
+version: '3'
+services:
+  datasource:
+    image: postgres
+    container_name: datasource
+    hostname: app-backend
+    networks:
+      - web
+    environment:
+      POSTGRES_DB: tasks_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  task-ms:
+    container_name: tasks-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - datasource
+      - keycloak
+    ports:
+      - "8080:8080"
+    hostname: app-backend
+    networks:
+      - web
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://datasource:5432/tasks_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_FLYWAY_ENABLED: "true"
+      SPRING_FLYWAY_BASELINE_ON_MIGRATE: "true"
+      SPRING_FLYWAY_LOCATIONS: classpath:/db/migration
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:21.0
+    container_name: keycloak
+    hostname: app-backend
+    volumes:
+      - ./keycloak:/opt/keycloak/data/import
+    networks:
+      - web
+    environment:
+      KC_HOSTNAME: localhost
+      PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command: -v start-dev --import-realm
+    ports:
+      - "8000:8080"
+
+networks:
+  web: { }

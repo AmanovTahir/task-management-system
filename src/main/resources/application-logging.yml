@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: logging
+logging:
+  file:
+    name: ./logs/task-ms.log
+  level:
+    root: debug

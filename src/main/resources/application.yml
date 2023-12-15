@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: task-ms
+  config:
+    import:
+      - application-actuator.yml
+      - application-security.yml
+      - application-db.yml
+      - application-logging.yml
+
+springdoc:
+  swagger-ui:
+    path: /
+
+server:
+  port: 8080
