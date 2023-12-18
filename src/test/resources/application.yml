@@ -8,9 +8,8 @@ spring:
     import:
       - application-logging.yml
       - application-db.yml
-      - application-security.yml
       - application-actuator.yml
-
+      - application-security-local.yml
 logging:
   level:
     sql: debug

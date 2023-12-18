@@ -7,6 +7,7 @@ spring:
       - application-security.yml
       - application-db.yml
       - application-logging.yml
+      - application-security-local.yml
 
 springdoc:
   swagger-ui:

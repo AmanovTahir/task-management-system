@@ -6,7 +6,6 @@ import com.company.taskms.dto.CommentDto;
 import com.company.taskms.exception.CommentNotFoundException;
 import com.company.taskms.model.CommentEntity;
 import com.company.taskms.service.CommentService;
-import com.company.taskms.service.TaskService;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
