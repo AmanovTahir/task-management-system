@@ -2,6 +2,7 @@ package com.company.taskms.web;
 
 import com.company.taskms.dto.CommentDto;
 import com.company.taskms.handler.CommentHandler;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Comments", description = "the Comments API")
 @RequestMapping("/v1/api/comments/")
 public class CommentApiDelegateImpl implements CommentApiDelegate {
     private final CommentHandler commentHandler;

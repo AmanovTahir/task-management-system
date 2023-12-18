@@ -4,6 +4,7 @@ import com.company.taskms.dto.TaskDto;
 import com.company.taskms.dto.request.TasksRequest;
 import com.company.taskms.handler.TaskHandler;
 import com.company.taskms.model.enumeration.TaskStatus;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Tasks", description = "the Tasks API")
 @RequestMapping("/v1/api/tasks/")
 public class TaskApiDelegateImpl implements TaskApiDelegate {
     private final TaskHandler handler;

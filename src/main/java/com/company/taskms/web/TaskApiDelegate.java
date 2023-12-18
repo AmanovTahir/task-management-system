@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ interface TaskApiDelegate {
             )
     )
     @GetMapping("{taskId}")
-    ResponseEntity<TaskDto> find(@Positive @PathVariable Long taskId);
+    ResponseEntity<TaskDto> find(@Positive @PathVariable @Min(0) Long taskId);
 
     @Operation(
             summary = "Update a task",
@@ -59,7 +60,7 @@ interface TaskApiDelegate {
     @ApiResponse(responseCode = "200", description = "Task updated successfully",
             content = @Content(mediaType = "application/json", schema = @Schema(implementation = TaskDto.class)))
     @PutMapping("{taskId}")
-    ResponseEntity<TaskDto> update(@Positive @PathVariable Long taskId,
+    ResponseEntity<TaskDto> update(@Positive @PathVariable @Min(0) Long taskId,
                                    @Valid @RequestBody TaskDto dto,
                                    @AuthenticationPrincipal Jwt principal);
 
@@ -84,7 +85,7 @@ interface TaskApiDelegate {
             responseCode = "200",
             description = "Task deleted successfully")
     @DeleteMapping("{taskId}")
-    ResponseEntity<Void> delete(@Positive @PathVariable Long taskId,
+    ResponseEntity<Void> delete(@Positive @PathVariable @Min(0) Long taskId,
                                 @AuthenticationPrincipal Jwt principal);
 
     @Operation(
@@ -98,7 +99,7 @@ interface TaskApiDelegate {
             )
     )
     @PatchMapping("{taskId}/status")
-    ResponseEntity<TaskDto> updateStatus(@Positive @PathVariable Long taskId,
+    ResponseEntity<TaskDto> updateStatus(@Positive @PathVariable @Min(0) Long taskId,
                                          @NotNull @RequestBody TaskStatus status,
                                          @AuthenticationPrincipal Jwt principal);
 
@@ -113,8 +114,8 @@ interface TaskApiDelegate {
             )
     )
     @PatchMapping("{taskId}/assignee")
-    ResponseEntity<TaskDto> assignTaskToUser(@Positive @PathVariable Long taskId,
-                                             @Positive @RequestParam Long userId,
+    ResponseEntity<TaskDto> assignTaskToUser(@Positive @PathVariable @Min(0) Long taskId,
+                                             @Positive @RequestParam @Min(0) Long userId,
                                              @AuthenticationPrincipal Jwt principal);
 
     @Operation(

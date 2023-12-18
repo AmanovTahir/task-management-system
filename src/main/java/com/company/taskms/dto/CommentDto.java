@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentDto {
-    @NotBlank
+    @NotBlank(message = "comment cannot be blank")
     private String comment;
 }
