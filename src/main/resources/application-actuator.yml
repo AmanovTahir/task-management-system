@@ -16,8 +16,6 @@ management:
   endpoint:
     health:
       show-details: always
-    circuitbreakers:
-      enabled: true
     logfile:
       external-file: ${logging.file.name}
   health:

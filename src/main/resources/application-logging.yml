@@ -6,4 +6,4 @@ logging:
   file:
     name: ./logs/task-ms.log
   level:
-    root: debug
+    org.springframework.security: info
