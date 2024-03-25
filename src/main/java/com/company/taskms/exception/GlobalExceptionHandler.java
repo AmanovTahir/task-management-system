@@ -1,5 +1,6 @@
 package com.company.taskms.exception;
 
+import com.company.taskms.dto.request.ErrorResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -11,8 +12,8 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({CommentNotFoundException.class, TaskNotFoundException.class, UserNotFoundException.class})
-    public ResponseEntity<String> handleCustomException(RuntimeException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorResponseDto> handleCustomException(RuntimeException ex) {
+        return new ResponseEntity<>(new ErrorResponseDto(ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(PermissionDeniedException.class)
